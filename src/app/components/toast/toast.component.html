@@ -1,0 +1,19 @@
+<div id="toast-container" class="toast-top-right">
+  <div
+    *ngFor="let item of toasts"
+    class="toast {{ cssClass(item) }}"
+    style="display: block !important"
+    [attr.aria-live]="'polite'"
+  >
+    <button
+      type="button"
+      class="toast-close-button"
+      role="button"
+      (click)="removeToast(item)"
+    >
+      ×
+    </button>
+
+    <div class="toast-message">{{ item.message }}</div>
+  </div>
+</div>

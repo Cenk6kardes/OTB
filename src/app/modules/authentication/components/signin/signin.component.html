@@ -1,0 +1,72 @@
+<otb-section rowClasses="align-items-end vh-50 " bgImageUrl="assets/images/settings-background.jpg">
+  <div id="container" class="align-items-center position-relative">
+    <div class="card rounded-5 bg-transparent">
+      <div class="card-body">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12 col-xl-2 text-center">
+            <img class="me-3 avatar avatar-xl border-0" src="assets/logos/favicon-black.png" alt="Settings page icon" />
+          </div>
+          <div class="col-12 col-xl-6 offset-xl-1">
+            <h1 class="text-center pb-2">Login</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <mdb-form-control class="col-8 mb-1">
+                  <input mdbInput type="text" id="emailForm" class="form-control" formControlName="identifier"
+                    placeholder="name.surname" />
+                  <label mdbLabel class="form-label" for="emailForm">Email address</label>
+                  <mdb-error *ngIf="identifier?.touched && identifier?.errors?.['required']">*E-mail
+                    required.</mdb-error>
+                  <mdb-error *ngIf="identifier?.touched && identifier?.errors?.['pattern']">*Enter "name.surname"
+                    without
+                    @domain.</mdb-error>
+                </mdb-form-control>
+                <mdb-form-control class="col-4 mb-1">
+                  <input mdbInput class="form-control bg-transparent" id="disabled" type="text" [disabled]="true" />
+                  <label mdbLabel class="form-label" for="disabled">@orioninc.com</label>
+                </mdb-form-control>
+                <mdb-form-control class="d-flex mt-4 align-items-center">
+                  <input mdbInput [type]="showPassword ? 'text' : 'password'" id="passwordForm" class="form-control"
+                    formControlName="password" />
+                  <label mdbLabel class="form-label" for="passwordForm">Password</label>
+                  <button (click)="showPasswordToggle()" type="button" class="btn btn-tertiary" mdbTooltip="Show/Hide">
+                    <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                  </button>
+                  <mdb-error *ngIf="password?.touched && password?.errors?.['required']">*Password
+                    required.</mdb-error>
+                  <mdb-error *ngIf="password?.touched && password?.errors?.['minlength']">*Password
+                    must be at least 6 characters long.</mdb-error>
+                </mdb-form-control>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                  <div class="form-check">
+                    <input mdbCheckbox class="form-check-input" type="checkbox" id="rememberMe"
+                      formControlName="rememberMe" />
+                    <label mdbLabel class="form-check-label" for="rememberMe">
+                      Remember me
+                    </label>
+                  </div>
+                  <button (click)="forgotPassword()" type="button" class="btn btn-tertiary" mdbRipple>
+                    Forgot password?
+                  </button>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
+                  Sign in
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 col-xl-3">
+            <p class="text-muted fw-bold text-center">
+              Don't have an account ?
+            </p>
+            <div class="text-center">
+              <button type="button" class="btn btn-rounded btn-ico bg-light" mdbTooltip="Go to signup"
+                routerLink="/auth/signup">
+                <i class="fas fa-user-plus fs-20"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</otb-section>

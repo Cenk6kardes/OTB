@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="btn-close" [attr.aria-label]="'Close'" (click)="modalRef.close()"></button>
+</div>
+<form class="text-md-start border border-light p-5" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <!-- Default form contact -->
+    <p class="h4 mb-4">Contact us</p>
+    <div *ngIf="reasonArray; then dropdown; else spinner"></div>
+    <ng-template #dropdown>
+      <!-- Subject -->
+      <label class="h-6 mb-2">Subject</label>
+      <mdb-form-control>
+        <ng-select mdbValidate mdbInput [clearable]="false" [readonly]="relatedPostId ? true : false"
+          placeholder="Please Select a Reason" formControlName="reasonId" class="custom-select mb-4">
+          <ng-option *ngFor="let reason of reasonArray" [value]="reason.id">
+            {{ reason.title }}
+          </ng-option>
+          <mdb-error *ngIf="reasonId?.invalid && reasonId?.touched && reasonId?.errors?.['required']">
+            Report Reason is required.
+          </mdb-error>
+        </ng-select>
+      </mdb-form-control>
+    </ng-template>
+    <ng-template #spinner>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border m-2" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+    <!-- Message -->
+    <div class="form-group mb-3">
+      <mdb-form-control>
+        <textarea mdbValidate mdbInput formControlName="detail" class="form-control rounded-0" rows="3"
+          placeholder="Message"></textarea>
+        <mdb-error *ngIf="detail?.invalid && detail?.touched && detail?.errors?.['required']">
+          Message is required.
+        </mdb-error>
+      </mdb-form-control>
+    </div>
+    <!-- Default form contact -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+      Close
+    </button>
+    <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">
+      Save changes
+    </button>
+  </div>
+</form>

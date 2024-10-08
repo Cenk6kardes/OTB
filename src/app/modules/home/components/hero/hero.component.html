@@ -1,0 +1,25 @@
+<otb-fluid-section
+  rowClasses="align-items-end vh-50 mb-5"
+  bgImageUrl="assets/images/home-background.jpeg"
+>
+  <div class="row align-items-center position-relative">
+    <div class="col-4 col-lg-3">
+      <img
+        class="avatar avatar-xl rounded-circle shadow-3-strong me-3"
+        [src]="authenticationService.userValue.gravatarImageUrl + '&s=160'"
+        [alt]="authenticationService.userValue.userName"
+      />
+    </div>
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h2 class="mb-0">Start a post <b>NOW!</b></h2>
+          <span class="text-muted">Simple & fast way to reach knowledge</span>
+        </div>
+        <div class="col-md-4 text-start text-md-end">
+          <otb-create-new-post-button></otb-create-new-post-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</otb-fluid-section>

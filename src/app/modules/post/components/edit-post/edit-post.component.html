@@ -1,0 +1,27 @@
+<otb-section
+  rowClasses="align-items-end vh-30 mb-7"
+  bgImageUrl="assets/images/post-module-background.jpg"
+>
+  <div class="row align-items-center position-relative">
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-md-8 text-center text-md-start mb-3">
+          <h1 class="mb-0">Edit Your Post</h1>
+        </div>
+        <div class="col-md-4 text-center text-md-end mb-3">
+          <button
+            class="btn btn-rounded btn-ico bg-light"
+            mdbTooltip="Go to homepage"
+            routerLink="/"
+          >
+            <i class="fas fa-home fs-20"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</otb-section>
+
+<otb-section>
+  <otb-post-form [formType]="'edit'"></otb-post-form>
+</otb-section>

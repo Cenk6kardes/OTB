@@ -1,0 +1,60 @@
+::ng-deep .ng-select {
+  .ng-select-container {
+    border: 1px solid #bdbdbd;
+  }
+  .ng-select-container .ng-value-container .ng-placeholder {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+::ng-deep .error-message {
+  top: 36px;
+}
+
+::ng-deep textarea ~ .error-message {
+  bottom: -23px;
+}
+
+::ng-deep .ng-select.error {
+  .ng-select-container {
+    border: 1px solid #dc4c64;
+  }
+  .ng-select-container .ng-value-container .ng-placeholder {
+    color: #dc4c64;
+  }
+}
+
+::ng-deep .ng-select.success {
+  .ng-select-container {
+    border: 1px solid #14a44d;
+  }
+}
+
+.mt-2r {
+  margin-top: 2rem;
+}
+
+.mt-05r {
+  margin-top: 0.5rem;
+}
+
+::ng-deep .NgxEditor__Content {
+  min-height: 12rem;
+}
+
+.NgxEditor__Wrapper {
+  border: 1px solid #bdbdbd;
+}
+
+.NgxEditor__Wrapper ~ .error-message {
+  bottom: -23px;
+  top: unset;
+}
+
+.NgxEditor__Wrapper.error {
+  border: 1px solid #dc4c64;
+}
+
+.NgxEditor__Wrapper.success {
+  border: 1px solid #14a44d;
+}

@@ -1,0 +1,14 @@
+<otb-loading
+  *ngIf="loadingSpinner.loadingSub | async"
+  [isFullPage]="true"
+></otb-loading>
+
+<otb-header
+  *ngIf="(isLoggedIn | async) && (gotPages | async)!.length > 0"
+></otb-header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<otb-footer></otb-footer>
+
+<otb-toast></otb-toast>

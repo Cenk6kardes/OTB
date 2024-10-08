@@ -1,0 +1,74 @@
+<ng-container *ngIf="postDetail.title">
+  <otb-section rowClasses="align-items-end vh-40 mb-4" bgImageUrl="assets/images/post-module-background.jpg">
+    <div class="row align-items-center position-relative">
+      <div class="col mb-3">
+        <div class="row align-items-center">
+          <div class="col-md-8 text-center text-md-start">
+            <h2 class="mb-0">{{ postDetail.customTitle | titlecase }}</h2>
+            <span class="text-muted">Created by
+              {{
+              postDetail.user.title ? postDetail.user.title : "unknown"
+              }}</span>
+          </div>
+          <div class="col-md-4 text-center text-md-end h-stack gap-1 flex-row-reverse">
+            <h5 *ngFor="let category of postDetail.categories">
+              <span class="badge badge-primary">{{ category.title }}</span>
+            </h5>
+            <!-- <button class="btn btn-rounded btn-ico bg-light" mdbTooltip="Go to homepage" routerLink="/"><i
+                class="fas fa-home fs-20"></i></button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </otb-section>
+  <hr class="hr" />
+  <otb-section>
+    <article>
+      <div class="row">
+        <div class="col-12 mb-2">
+          <h4 *ngIf="postDetail.url" [innerHtml]="postDetail.title"></h4>
+        </div>
+        <div class="col-12 mb-5" *ngIf="postDetail.url">
+          <p class="post-content">{{ postDetail.summary }}</p>
+          <hr class="hr" />
+          <a [href]="postDetail.url" class="fw-bold" target="_blank" rel="nofollow">
+            Read the rest of this post
+            <i class="fas fa-angle-double-right fa-xs"></i>
+          </a>
+        </div>
+        <div class="col-12" *ngIf="!postDetail.url" [innerHTML]="postDetail.content">
+        </div>
+      </div>
+    </article>
+  </otb-section>
+  <hr class="hr" />
+  <otb-section>
+    <div class="row mt-2">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col hstack gap-1 flex-wrap">
+            <h5 *ngFor="let tag of postDetail.tags">
+              <span class="badge rounded-pill bg-dark">#{{ tag.title }}</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 text-end">
+        <a class="btn btn-ico btn-lg btn-floating btn-outline-light text-danger me-1" (click)="likeButtonHandler()">
+          <i [className]="
+              postDetail.isLikedByUser
+                ? 'fas fa-heart fs-30'
+                : 'far fa-heart fs-30'
+            "></i>
+        </a>
+        <a class="btn btn-ico btn-lg btn-floating btn-outline-light text-info" (click)="bookmarkButtonHandler()">
+          <i [className]="
+              postDetail.isBookmarkedByUser
+                ? 'fas fa-bookmark fs-30'
+                : 'far fa-bookmark fs-30'
+            "></i>
+        </a>
+      </div>
+    </div>
+  </otb-section>
+</ng-container>

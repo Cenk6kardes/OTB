@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+@import 'assets/styles/hero.scss';
+
+@font-face {
+  font-family: "CircularRegular";
+  src: url(./assets/fonts/CircularXXWeb-Regular.woff2);
+}
+
+@font-face {
+  font-family: "CircularBold";
+  src: url(./assets/fonts/CircularXXWeb-Bold.woff2);
+}
+
+$font-family-base: "CircularRegular",sans-serif;;
+
+body {
+  font-family: "CircularRegular",sans-serif;;
+
+  a {
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+      opacity: .65;
+      text-decoration: none;
+    }
+  }
+
+  main {
+    .avatar {
+      border: 1px solid #000;
+      border-radius: 0.25rem;
+      width: 3.75rem;
+      height: 3.75rem;
+    }
+
+    .avatar[class*="-xl"] {
+      width: 10rem;
+      height: auto;
+      border: 3px solid #000;
+    }
+
+    .btn-ico {
+      position: relative;
+      width: 3.375rem;
+      height: 3.375rem;
+      padding: 0;
+
+      &--xxl {
+        width: 7rem;
+        height: 7rem;
+      }
+    }
+  }
+
+  .vh-40 {
+    height: 40vh;
+  }
+
+  .vh-50 {
+    height: 50vh;
+  }
+
+  .vh-30 {
+    height: 30vh;
+  }
+
+  .vh-20 {
+    height: 20vh;
+  }
+}

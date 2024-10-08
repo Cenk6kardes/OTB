@@ -1,0 +1,15 @@
+<otb-fluid-section>
+  <div id="container" class="hstack gap-1">
+    <button
+      *ngFor="let category of categoryService.categories$ | async"
+      mdbRipple
+      rippleColor="dark"
+      (click)="selectCategory(category.selected ? null : category.id)"
+      type="button"
+      class="btn btn-light"
+      [class.selected]="category.selected"
+    >
+      {{ category.title }}
+    </button>
+  </div>
+</otb-fluid-section>

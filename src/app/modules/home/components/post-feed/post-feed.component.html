@@ -1,0 +1,11 @@
+<otb-fluid-section *ngIf="items$ | async as items">
+  <otb-post-card
+    *ngFor="let item of items"
+    [postCardData]="item"
+  ></otb-post-card>
+  
+  <div *ngIf="items.length === 0" class="text-center">
+    <p class="">No posts to show!</p>
+    <otb-create-new-post-button></otb-create-new-post-button>
+  </div>
+</otb-fluid-section>

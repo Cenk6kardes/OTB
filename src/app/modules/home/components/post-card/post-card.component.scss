@@ -1,0 +1,11 @@
+.media-body {
+  flex: 1;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.badge {
+  cursor: pointer;
+}

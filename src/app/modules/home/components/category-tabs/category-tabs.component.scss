@@ -1,0 +1,27 @@
+#container {
+  border: 2px outset;
+  border-radius: 0.25rem;
+  border-top: none;
+  border-left: none;
+
+  .btn {
+    border-bottom: 2px solid #fbfbfb;
+
+    &:hover {
+      border-color: #eeeeee;
+    }
+  }
+
+  .btn:not(.selected) {
+    border-bottom-color: #eeeeee;
+  }
+
+  .selected {
+    border-bottom: 2px solid #000;
+    background-color: #eeeeee;
+
+    &:hover {
+      border-color: #000;
+    }
+  }
+}

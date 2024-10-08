@@ -1,0 +1,16 @@
+<section class="p-0" [ngClass]="sectionClasses">
+  <div
+    *ngIf="bgImageUrl"
+    class="image image-overlay image-cover"
+    [style.backgroundImage]="'url(' + bgImageUrl + ')'"
+    [style.height.vh]="bgHeight"
+  ></div>
+
+  <div class="container" [ngClass]="containerClasses">
+    <div class="row justify-content-center" [ngClass]="rowClasses">
+      <div class="col col-md-10 col-lg-8" [ngClass]="colClasses">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,81 @@
+<div *ngIf="postListData">
+  <div class="row justify-content-center">
+    <span
+      *ngIf="postListData.length <= 0; else elseBlock"
+      class="text-muted text-center"
+      >No post to show</span
+    >
+  </div>
+  <ng-template #elseBlock>
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th scope="col"><strong>Title</strong></th>
+          <th *ngIf="showUsernameColumn" scope="col">
+            <strong>Username</strong>
+          </th>
+          <th scope="col"><strong>Page</strong></th>
+          <th scope="col"><strong>Categories</strong></th>
+          <th scope="col"><strong>Tags</strong></th>
+          <th scope="col"><strong>Actions</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of postListData">
+          <td class="w-75" [innerHTML]="post.title"></td>
+          <td *ngIf="showUsernameColumn">{{ post.username }}</td>
+          <td>{{ post.pageTitle }}</td>
+          <td>
+            <h6 *ngFor="let category of post.categories">
+              <span class="badge badge-primary">{{ category.title }}</span>
+            </h6>
+          </td>
+          <td>
+            <h6 *ngFor="let tag of post.tags">
+              <span class="badge rounded-pill badge-dark"
+                >#{{ tag.title }}</span
+              >
+            </h6>
+          </td>
+          <td class="text-nowrap">
+            <a
+              *ngIf="!isAdmin"
+              [routerLink]="[
+                '/' + (post.pageTitle | slugify) + '/post/detail',
+                post.postId
+              ]"
+            >
+              <button
+                type="button"
+                class="btn btn-info btn-sm btn-floating me-1"
+              >
+                <i class="fas fa-book-open"></i>
+              </button>
+            </a>
+            <a
+              *ngIf="
+                !isBookmarked ||
+                post.username === authenticationService.userValue.userName ||
+                isAdmin
+              "
+              [routerLink]="[
+                '/' + (post.pageTitle | slugify) + '/post/edit',
+                post.postId
+              ]"
+            >
+              <button type="button" class="btn btn-primary btn-sm btn-floating">
+                <i
+                  class="fas"
+                  [ngClass]="{
+                    'fa-pen-to-square': !isAdmin,
+                    'fa-clipboard-check': isAdmin
+                  }"
+                ></i>
+              </button>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="btn-close" [attr.aria-label]="'Close'" (click)="modalRef.close()"></button>
+</div>
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="modal-body text-center">
+    <div class="form-check form-check-inline my-2">
+      <input mdbRadio class="form-check-input" type="radio" id="internal" value="internal" [checked]="true"
+        formControlName="postType" />
+      <label class="form-check-label" for="internal">Internal Post</label>
+    </div>
+    <div class="form-check form-check-inline my-2">
+      <input mdbRadio class="form-check-input" type="radio" id="external" value="external" formControlName="postType" />
+      <label class="form-check-label" for="external">External Post</label>
+    </div>
+    <mdb-form-control class="my-4" *ngIf="form.value.postType === 'external'">
+      <input mdbInput type="url" id="url" class="form-control" formControlName="externalUrl"
+        [readonly]="form.value.postType === 'internal'" />
+      <label mdbLabel class="form-label" for="url">URL</label>
+    </mdb-form-control>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary mx-3" (click)="modalRef.close()">
+      Close
+    </button>
+    <button type="submit" class="btn btn-primary mx-3" [disabled]="form.invalid">
+      Create Post
+    </button>
+  </div>
+</form>

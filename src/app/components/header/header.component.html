@@ -1,0 +1,88 @@
+<header class="header header-dark bg-black">
+  <ngx-headroom>
+    <div *ngIf="(pages$ | async) as pages" class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark pt-4 p-lg-0">
+        <div class="container-fluid bg-black">
+          <div class="navbar-brand">
+            <a (click)="setActivePageId(pages[0].id)" [routerLink]="pages[0].slug" rel="home" class="d-flex">
+              <div class="site-logo"></div>
+              <span>Tech Blog</span>
+            </a>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            (click)="noListNav.toggle()"
+            [attr.aria-expanded]="false"
+            [attr.aria-label]="'Toggle navigation'"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div
+            class="collapse navbar-collapse"
+            mdbCollapse
+            #noListNav="mdbCollapse"
+          >
+            <ul class="navbar-nav align-items-center me-auto">
+              <li *ngFor="let page of pages" class="nav-item">
+                <a
+                  (click)="setActivePageId(page.slug)"
+                  [routerLink]="page.slug"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="nav-link"
+                  role="button"
+                >
+                  {{ page.title }}
+                </a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav align-items-center d-flex">
+              <li mdbDropdown class="nav-item dropdown">
+                <a
+                  class="dropdown-toggle"
+                  id="userMenuLink"
+                  role="button"
+                  mdbDropdownToggle
+                  [attr.aria-expanded]="false"
+                >
+                  {{ userName }}
+                </a>
+                <ul
+                  mdbDropdownMenu
+                  class="dropdown-menu"
+                  [attr.aria-labelledby]="'userMenuLink'"
+                >
+                  <li>
+                    <a class="dropdown-item" routerLink="/user-profile"
+                      >Profile</a
+                    >
+                  </li>
+                  <!-- <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/settings">Settings</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li> -->
+                  <li>
+                    <a
+                      routerLink="/auth/login"
+                      (click)="authenticationService.logout()"
+                      class="dropdown-item"
+                      >Logout</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </ngx-headroom>
+</header>

@@ -1,0 +1,59 @@
+<otb-section rowClasses="align-items-end vh-50 " bgImageUrl="assets/images/settings-background.jpg">
+  <div id="container" class="align-items-center position-relative">
+    <div class="card rounded-5 bg-transparent">
+      <div class="card-body">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12 col-xl-2 text-center">
+            <img class="me-3 avatar avatar-xl border-0" src="assets/logos/favicon-black.png" alt="Settings page icon" />
+          </div>
+          <div class="col-12 col-xl-6 offset-xl-1">
+            <h1 class="text-center ">Register</h1>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row">
+              <mdb-form-control class="mt-4 col-8">
+                <input mdbInput id="emailForm" class="form-control" formControlName="email"
+                  placeholder="name.surname" />
+                <label mdbLabel class="form-label" for="emailForm">Email</label>
+                <mdb-error *ngIf="email?.touched && email?.errors?.['required']">*E-mail required.</mdb-error>
+                <mdb-error *ngIf="email?.touched && email?.errors?.['pattern']">*Enter "name.surname" without
+                  @domain.</mdb-error>
+              </mdb-form-control>
+              <mdb-form-control class="mt-4 col-4">
+                <input mdbInput class="form-control bg-transparent" id="disabled" type="text" [disabled]="true" />
+                <label mdbLabel class="form-label" for="disabled">@orioninc.com</label>
+              </mdb-form-control>
+              <mdb-form-control class="mt-4">
+                <input mdbInput type="password" id="passwordForm" class="form-control" formControlName="password" />
+                <label mdbLabel class="form-label" for="passwordForm">Password</label>
+                <mdb-error *ngIf="password?.touched && password?.errors?.['required']">*Password required.</mdb-error>
+                <mdb-error *ngIf="password?.touched && password?.errors?.['minlength']">*Password
+                  must be at least 6 characters long.</mdb-error>
+              </mdb-form-control>
+              <mdb-form-control class="mt-4">
+                <input mdbInput type="password" id="confirmPasswordForm" class="form-control"
+                  formControlName="confirmPassword" />
+                <label mdbLabel class="form-label" for="confirmPasswordForm">Confirm Password</label>
+                <mdb-error *ngIf="confirmPassword?.touched && confirmPassword?.errors?.['required']">*Confirm Password
+                  required.</mdb-error>
+                <mdb-error *ngIf="form?.['matching']">*Passwords do not matching.</mdb-error>
+                <mdb-error *ngIf="confirmPassword?.touched && confirmPassword?.errors?.['minlength']">*Password
+                  must be at least 6 characters long.</mdb-error>
+              </mdb-form-control>
+              <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
+                Register
+              </button>
+            </form>
+          </div>
+          <div class="col-12 col-xl-3">
+            <p class="text-muted fw-bold text-center">
+              Already a member?
+            </p>
+            <div class="text-center">
+              <button type="button" class="btn btn-rounded btn-ico bg-light" mdbTooltip="Go to signin"
+                routerLink="/auth/signin"><i class="fas fa-sign-in-alt fs-20"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</otb-section>

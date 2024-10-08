@@ -1,0 +1,102 @@
+<otb-section
+  rowClasses="align-items-end vh-50 mb-5"
+  bgImageUrl="assets/images/user-profile-background.jpg"
+>
+  <div class="row align-items-center position-relative">
+    <div class="col-4 col-lg-3">
+      <img
+        class="me-3 avatar avatar-xl rounded-circle shadow-3-strong"
+        [src]="authenticationService.userValue.gravatarImageUrl + '&s=160'"
+        [alt]="userData.displayName | titlecase"
+      />
+    </div>
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h2 class="mb-0"><b>Welcome</b>,</h2>
+          <span class="text-muted">{{ userData.displayName | titlecase }}</span>
+        </div>
+        <div class="col-md-4 text-end text-md-end">
+          <button
+            (click)="openGravatarLoginPage()"
+            class="btn btn-rounded btn-ico bg-light"
+            mdbTooltip="Edit your profile picture on Gravatar"
+          >
+            <i class="fas fa-image fs-20"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</otb-section>
+<otb-section>
+  <mdb-accordion [flush]="true">
+    <mdb-accordion-item *ngIf="userData.isAdmin" [collapsed]="false">
+      <ng-template mdbAccordionItemHeader>Admin Approval List</ng-template>
+      <ng-template mdbAccordionItemBody>
+        <div class="row justify-content-center">
+          <otb-post-table
+            [isBookmarked]="false"
+            [isAdmin]="userData.isAdmin"
+          ></otb-post-table>
+        </div>
+      </ng-template>
+    </mdb-accordion-item>
+
+    <mdb-accordion-item [collapsed]="userData.isAdmin">
+      <ng-template mdbAccordionItemHeader>User Details</ng-template>
+      <ng-template mdbAccordionItemBody>
+        <div class="row justify-content-center py-3">
+          <div class="col-6">
+            <mdb-form-control>
+              <input
+                mdbInput
+                id="username"
+                class="form-control form-control-lg"
+                [value]="userData.userName"
+                [disabled]="true"
+              />
+              <label mdbLabel class="form-label fw-bold" for="username"
+              >Username</label
+              >
+            </mdb-form-control>
+          </div>
+
+          <div class="col-6">
+            <mdb-form-control>
+              <input
+                mdbInput
+                type="email"
+                id="email"
+                class="form-control form-control-lg"
+                [value]="userData.email"
+                [disabled]="true"
+              />
+              <label mdbLabel class="form-label fw-bold" for="email"
+              >E-mail Address</label
+              >
+            </mdb-form-control>
+          </div>
+        </div>
+      </ng-template>
+    </mdb-accordion-item>
+
+    <mdb-accordion-item [collapsed]="userPostListCollapsed" (itemShow)="userPostListCollapsed=false">
+      <ng-template mdbAccordionItemHeader>User Post List</ng-template>
+      <ng-template mdbAccordionItemBody>
+        <div class="row justify-content-center" *ngIf="!userPostListCollapsed">
+          <otb-post-table [isBookmarked]="false"></otb-post-table>
+        </div>
+      </ng-template>
+    </mdb-accordion-item>
+
+    <mdb-accordion-item [collapsed]="userBookmarkedPostListCollapsed" (itemShow)="userBookmarkedPostListCollapsed=false">
+      <ng-template mdbAccordionItemHeader>User Bookmarked List</ng-template>
+      <ng-template mdbAccordionItemBody>
+        <div class="row justify-content-center" *ngIf="!userBookmarkedPostListCollapsed">
+          <otb-post-table [isBookmarked]="true"></otb-post-table>
+        </div>
+      </ng-template>
+    </mdb-accordion-item>
+  </mdb-accordion>
+</otb-section>

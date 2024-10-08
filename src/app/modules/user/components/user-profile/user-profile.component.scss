@@ -1,0 +1,15 @@
+.post-item {
+  width: 20rem;
+  padding: 5px;
+  cursor: pointer;
+
+  .card {
+    .card-body {
+      padding: .75rem;
+
+      .card-tags {
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="postForm" (ngSubmit)="submitForm()">
+      <mdb-form-control *ngIf="postType === 'external'" class="mb-4">
+        <input mdbValidate mdbInput type="text" id="custom" class="form-control" formControlName="customTitle"
+          [attr.aria-describedby]="customTitle?.value.length" [maxlength]="maxChars.customTitle" />
+        <label mdbLabel class="form-label" for="custom">Custom Title</label>
+        <div class="form-helper">
+          <div class="form-counter">
+            {{ customTitle?.value.length }} / {{ maxChars.customTitle }}
+          </div>
+        </div>
+        <mdb-error *ngIf="customTitle?.invalid && customTitle?.touched && !customTitle?.errors?.['required']">Custom
+          Title is invalid</mdb-error>
+        <mdb-error *ngIf="customTitle?.touched && customTitle?.errors?.['required']">Custom Title required.</mdb-error>
+      </mdb-form-control>
+
+      <mdb-form-control class="mb-4 mt-2r">
+        <input mdbValidate mdbInput type="text" id="title" class="form-control" formControlName="title"
+          [attr.aria-describedby]="title?.value.length" [maxlength]="maxChars.title" />
+        <label mdbLabel class="form-label" for="title">Title</label>
+        <div class="form-helper">
+          <div class="form-counter">
+            {{ title?.value.length }} / {{ maxChars.title }}
+          </div>
+        </div>
+        <mdb-error *ngIf="title?.invalid && title?.touched && !title?.errors?.['required']">Title is invalid</mdb-error>
+        <mdb-error *ngIf="title?.touched && title?.errors?.['required']">Title required.</mdb-error>
+      </mdb-form-control>
+
+      <mdb-form-control class="mb-4 mt-2r" *ngIf="url?.value">
+        <textarea mdbValidate mdbInput class="form-control" id="summary" rows="4" formControlName="summary"
+          [attr.aria-describedby]="summary?.value.length" [maxlength]="maxChars.summary"></textarea>
+        <label mdbLabel class="form-label" for="summary">Summary</label>
+        <div class="form-helper">
+          <div class="form-counter">
+            {{ summary?.value.length }} / {{ maxChars.summary }}
+          </div>
+        </div>
+        <mdb-error *ngIf="summary?.invalid && summary?.touched && !summary?.errors?.['required']">Summmary is invalid
+        </mdb-error>
+        <mdb-error *ngIf="summary?.touched && summary?.errors?.['required']">Summary is required.</mdb-error>
+      </mdb-form-control>
+
+      <mdb-form-control class="mb-4 mt-2r" *ngIf="!url?.value">
+        <div class="NgxEditor__Wrapper" mdbInput
+          [ngClass]="content?.touched && content?.errors?.['required'] ? 'error' : content?.touched ? 'success': ''">
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+          <ngx-editor [editor]="editor" [placeholder]="'Type Content Here...'" formControlName="content"
+            (ngModelChange)="triggerContentValidators()"></ngx-editor>
+        </div>
+        <mdb-error *ngIf="content?.touched && content?.errors?.['required']">Content is required.</mdb-error>
+      </mdb-form-control>
+
+      <div class="row mt-2r">
+        <div class="col-sm-6 mb-4">
+          <mdb-form-control>
+            <ng-select placeholder="Post Status" mdbInput formControlName="postStatusId"
+              [ngClass]="postStatusId?.touched && postStatusId?.errors?.['required'] ? 'error' : postStatusId?.touched ? 'success': ''">
+              <ng-option *ngFor="let status of postStatuses | async" [value]="status.id">{{ status.title }}</ng-option>
+            </ng-select>
+            <mdb-error *ngIf="postStatusId?.touched && postStatusId?.errors?.['required']">Post Status Id is required.
+            </mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-sm-6 mb-4">
+          <mdb-form-control>
+            <ng-select placeholder="Post Level" mdbInput formControlName="postLevelId"
+              [ngClass]="postLevelId?.touched && postLevelId?.errors?.['required'] ? 'error' : postLevelId?.touched ? 'success': ''">
+              <ng-option *ngFor="let level of postLevels | async" [value]="level.id">{{ level.title }}</ng-option>
+            </ng-select>
+            <mdb-error *ngIf="postLevelId?.touched && postLevelId?.errors?.['required']">Post Level Id is required.
+            </mdb-error>
+          </mdb-form-control>
+        </div>
+      </div>
+      <div class="row mt-05r">
+        <div class="col-sm-6 mb-4">
+          <mdb-form-control>
+            <ng-select placeholder="Tags" mdbInput [multiple]="true" formControlName="tags">
+              <ng-option *ngFor="let tag of tags | async" [value]="tag.id">{{
+                tag.title
+              }}</ng-option>
+            </ng-select>
+          </mdb-form-control>
+        </div>
+        <div class="col-sm-6 mb-4">
+          <mdb-form-control>
+            <ng-select placeholder="Categories" mdbInput [multiple]="true" formControlName="categories"
+              [ngClass]="categoriesArea?.touched && categoriesArea?.errors?.['required'] ? 'error' : categoriesArea?.touched ? 'success': ''">
+              <ng-option *ngFor="let category of categories | async" [value]="category.id">{{ category.title }}
+              </ng-option>
+            </ng-select>
+            <mdb-error *ngIf="categoriesArea?.touched && categoriesArea?.errors?.['required']">Category is required.
+            </mdb-error>
+          </mdb-form-control>
+        </div>
+      </div>
+
+      <div class="col-12 text-end">
+        <button type="button" class="btn btn-secondary mx-3"
+          [routerLink]="formType === 'new' ? '/' : '/user-profile'">
+          Back
+        </button>
+        <button type="submit" class="btn btn-primary mt-4" [disabled]="postForm.invalid">
+          {{ formType === "new" ? "Create Post" : "Edit Post" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

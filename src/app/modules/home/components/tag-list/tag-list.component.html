@@ -1,0 +1,16 @@
+<otb-fluid-section *ngIf="tagService.tags$ | async as tags" sectionClasses="pt-2">
+  <div id="tag-list" class="row g-1 mb-2">
+
+    <div *ngFor="let tag of tags" class="tag-item">
+      <a (click)="selectTag(tag.selected ? null : tag.id)">
+        <div class="card mb-3" [ngClass]="{ 'text-white bg-dark': tag.selected, 'text-black bg-light': !tag.selected}">
+          <div class="card-body">
+            <h5 class="card-title">{{ tag.count ? tag.count : 0 }}</h5>
+            <p class="card-text">#{{ tag.title }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</otb-fluid-section>

@@ -1,0 +1,75 @@
+<div class="row mb-3">
+  <div class="col">
+    <article class="card">
+      <div class="card-header">
+        <div class="row align-items-center">
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <img class="avatar rounded-circle shadow-3-strong me-1"
+                [src]="authenticationService.createGravatarImageURL(postCardData.author) + '&s=60'"
+                [attr.alt]="postCardData.author" />
+              <div class="media-body">
+                <span class="mt-0">{{ postCardData.author }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 text-end">
+            <div mdbDropdown class="dropdown">
+              <a class="btn btn-ico btn-lg btn-floating btn-outline-light text-dark dropdown-toggle" role="button"
+                id="postAdminMenuLink" mdbDropdownToggle [attr.aria-expanded]="false">
+                <i class="fas fa-ellipsis-v fs-22"></i>
+              </a>
+              <ul mdbDropdownMenu class="dropdown-menu" [attr.aria-labelledby]="'postAdminMenuLink'">
+                <li><a type="button" class="dropdown-item" (click)="openModal(postCardData)">Report Post</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body overflow-hidden">
+        <ng-container *ngIf="postCardData.customTitle !== postCardData.title">
+          <h3>
+            {{ postCardData.customTitle }}
+          </h3>
+          <h4 [innerHTML]="postCardData.title"></h4>
+        </ng-container>
+        <h3 *ngIf="postCardData.customTitle === postCardData.title" [innerHTML]="postCardData.title"></h3>
+
+        <p>
+          {{ postCardData.summary }}
+        </p>
+        <div *ngIf="true || postCardData.hasMore" class="text-center w-100">
+          <a [routerLink]="'/' + (-1 | slugify)  + '/post/detail/' + postCardData.id " class="btn btn-secondary">Read
+            more</a>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col hstack gap-1">
+            <a class="btn btn-ico btn-lg btn-floating btn-outline-light text-danger"
+              (click)="likeButtonHandler(postCardData)"><i [className]="
+                  postCardData.isLiked
+                    ? 'fas fa-heart fs-22'
+                    : 'far fa-heart fs-22'
+                "></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ postCardData.likeCount }}
+                <span class="visually-hidden">like(s)</span>
+              </span>
+            </a>
+            <a class="btn btn-ico btn-lg btn-floating btn-outline-light text-info"
+              (click)="bookmarkButtonHandler(postCardData)"><i [className]="
+                  postCardData.isBookmarked
+                    ? 'fas fa-bookmark fs-22'
+                    : 'far fa-bookmark fs-22'
+                "></i></a>
+          </div>
+          <div class="col text-end">
+            <span *ngFor="let tag of postCardData.tags" (click)="tagClickHandler(tag.id)"
+              class="badge rounded-pill bg-dark ms-1">#{{ tag.title }}</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

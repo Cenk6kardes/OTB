@@ -1,0 +1,74 @@
+<otb-section
+  rowClasses="align-items-end vh-40 mb-5"
+  bgImageUrl="assets/images/post-module-background.jpg"
+>
+  <div class="row align-items-center position-relative">
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-md-8 text-center text-md-start mb-3">
+          <h1 class="mb-0">Post Type Selection</h1>
+        </div>
+        <div class="col-md-4 text-center text-md-end mb-3">
+          <button
+            class="btn btn-rounded btn-ico bg-light"
+            mdbTooltip="Go to homepage"
+            routerLink="/"
+          >
+            <i class="fas fa-home fs-20"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</otb-section>
+<otb-section>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="modal-body text-center">
+      <div class="form-check form-check-inline my-2">
+        <input
+          mdbRadio
+          class="form-check-input"
+          type="radio"
+          id="internal"
+          value="internal"
+          formControlName="postType"
+        />
+        <label class="form-check-label" for="internal">Internal Post</label>
+      </div>
+      <div class="form-check form-check-inline my-2">
+        <input
+          mdbRadio
+          class="form-check-input"
+          type="radio"
+          id="external"
+          value="external"
+          formControlName="postType"
+        />
+        <label class="form-check-label" for="external">External Post</label>
+      </div>
+      <mdb-form-control class="my-4" *ngIf="form.value.postType === 'external'">
+        <input
+          mdbInput
+          type="url"
+          id="url"
+          class="form-control"
+          formControlName="externalUrl"
+          [readonly]="form.value.postType === 'internal'"
+        />
+        <label mdbLabel class="form-label" for="url">URL</label>
+      </mdb-form-control>
+      <div class="text-center mt-5">
+        <button type="button" class="btn btn-secondary mx-3" routerLink="/">
+          Close
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary mx-3"
+          [disabled]="form.invalid"
+        >
+          Create Post
+        </button>
+      </div>
+    </div>
+  </form>
+</otb-section>
